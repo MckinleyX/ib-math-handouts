@@ -1,0 +1,146 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[sexy]{evan}
+\usepackage{epigraph}
+
+\title{An Introduction to Induction}
+\author{Mckinley Xie}
+
+\renewcommand{\epigraphrule}{0pt}
+\renewcommand{\epigraphflush}{center}
+\renewcommand{\textflush}{center}
+\renewcommand{\sourceflush}{flushright}
+
+\newtheorem{u_problem}{Problem} 
+% "universal problem" since it has a universal numbering scheme?
+
+\begin{document}
+\maketitle
+\epigraph{``I surrender.''}{ --- Brynn, 2021}
+
+
+
+\begin{abstract}
+Here's a handout on induction, since everyone seems really confused by it.
+
+This is my first time doing something like this, so feedback would be appreciated! \\
+My Discord is faefeyfa\#4843.\\ 
+You can also contact me at \mailto{mckinleyxie@gmail.com}
+\end{abstract}
+
+\tableofcontents
+
+\section{What is induction?}
+Induction is a \emph{very} useful technique in proofs. To use induction to prove something, we must prove the following two properties:
+
+\begin{enumerate}
+	\item The desired result is true for the first value (the base case)
+	\item If the desired result is true for some result, then it is true for the next result (the inductive step)
+\end{enumerate}
+
+This is a bit hard to parse, so let's restate that in terms of dominos. Suppose we have a row of dominos, and we want to prove that they will all be knocked over. To use induction we need to prove that:
+\begin{enumerate}
+	\item The first domino gets knocked over
+	\item If the $(k-1)$th domino is knocked over, then the $k$th domino will be knocked over.
+\end{enumerate}
+So if the first domino is knocked over, then the second domino is also knocked over. If the second domino is knocked over, then the third domino is knocked over, and so on and so forth until every domino is knocked over.
+
+\vspace{12pt}
+
+This is all a bit abstract, so let's try some examples.
+
+\section{Worked examples and exercises}
+
+\begin{example}
+	Prove that $2n$ is even for all $n \in \mathbb{Z}^+$.
+\end{example}
+\begin{proof}
+	Induction is completely unnecessary for this problem, but let's use it anyway.
+
+	For the base case, 2 is clearly even. 
+
+	In addition, for any $k \in \mathbb{Z}^+$, if the hypothesis is true for $n=k-1$ (i.e. $2(k-1)$ is even), then $2(k-1)+2 = 2k$ is even, meaning the inductive hypothesis is true for $n=k$, so we are done.
+\end{proof}
+
+Let's try a more difficult example.
+
+\begin{example}
+	Prove that
+	\[1 + 2 + \cdots + n = \frac{n\left(n+1\right)}{2}\]
+\end{example}
+\begin{proof}
+	We will use induction.
+
+	For the base case, clearly $1 = \frac{1(1+1)}{2}$.
+	For the inductive step, suppose that the formula holds for $n=k-1$. That is, suppose $1 + 2 + \cdots + \left(k-1\right) = \frac{(k-1)(k-1+1)}{2}$.
+	
+	We want to show that $1 + 2 + \cdots \left(k-1\right) + k = \frac{k(k+1)}{2}$.
+
+	This is just algebra:
+	\begin{align*}
+		1 + 2 + \cdots + \left(k-1\right) + k &= \frac{(k-1)k}{2} + k \\
+					 &= \frac{k^2 - k}{2} + \frac{2k}{2} \\
+					 &= \frac{k^2 + k}{2} \\
+		1 + 2 + \cdots + \left(k-1\right) + k &= \frac{k(k+1)}{2}
+	\end{align*}
+	And we are done.
+\end{proof}
+In the above proof, we proved the following two statements:
+\begin{enumerate}
+	\item Our formula is true for $n=1$
+	\item If the formula is true for $n=k-1$ then it is true for $n=k$.
+\end{enumerate}
+		So because our formula works for $n=2-1$, we know our formula works for $n=2$. Because our formula works for $n=3-1$, we know our formula works for $n=3$, and so on and so forth, so our formula must work for any arbitrary (integer) $n$.
+
+\begin{exercise}
+	Prove that
+	\[1^2 + 2^2 + \cdots n^2 = \frac{n(n+1)(2n+1)}{6}\]
+\end{exercise}
+
+\begin{exercise}
+	Prove that $2^n > n$ for all $n \in \mathbb{Z}^+$.
+\end{exercise}
+
+\begin{example}
+	Prove that $10 \mid 11^n - 1$ for any $n \in \mathbb{Z}^+$. (Recall that $a \mid b$ means that $a$ divides $b$.)
+\end{example}
+\begin{proof}
+	Once again, we will use induction. The base case is simple; 10 clearly divides $11-1$.
+
+	For the inductive step, suppose $10 \mid 11^{k-1} - 1$ for some integer $k \in \mathbb{Z}^+$. From this, we want to show that $10 \mid 11^k - 1$. Well,
+	\[10 \mid 11^{k-1} - 1 \implies 10 \mid 11 \cdot (11^{k-1} - 1) = 11^k - 11 \]
+	And if $10 \mid 11^k - 11$ then obviously $10 \mid 11^k - 1$ and we are done.
+
+\end{proof}
+\begin{remark*}
+	This class of problems can also be solved very quicky (and more satisfyingly) using \href{https://brilliant.org/wiki/modular-arithmetic/}{modular arithmetic}, which I may make a handout on soon.
+
+	If you want a taste of it, the idea is the following: \\
+	Note that $11^n$ always ends in a $1$, so $11^n - 1$ always ends in a 0, and we're done.
+\end{remark*}
+
+\begin{exercise}
+	Prove that $3 \mid 4^{n} - 7$ for $n \geq 2$
+\end{exercise}
+
+
+\section{Additional problems}
+Some of these problems (especially the later ones) are pretty hard, don't worry if you can't solve them.
+
+\begin{u_problem}
+	Prove that $(1 + 2 + \cdots n)^2 = 1^3 + 2^3 + \cdots + n^3$
+\end{u_problem}
+
+\begin{u_problem}
+	Prove that the expansion of ${\left(1 + x\right)}^n$ is
+	\[\binom{n}{0} + \binom{n}{1}x + \cdots + \binom{n}{n}x^n\]
+\end{u_problem}
+
+
+\begin{u_problem}
+	Prove that \[\frac{a_1 + a_2 + \cdots + a_n}{n} \geq \sqrt[n]{a_1 a_2 \cdots a_n}\] (This is known as the Arithmetic Mean -- Geometric Mean inequality, or AM--GM)  \\
+	Hint: Regular induction won't work here. The solution uses something called Cauchy Induction, which involves showing that $n=k$ works implies that $n=2k$ works and $n=k-1$ works.
+\end{u_problem}
+\section{Sources (and helpful links)}
+\url{https://brilliant.org/wiki/induction/} \\
+\url{https://artofproblemsolving.com/wiki/index.php?title=Induction}
+\end{document}
