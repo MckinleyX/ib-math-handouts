@@ -23,7 +23,7 @@
 Here's a handout on induction, since everyone seems really confused by it.
 
 This is my first time doing something like this, so feedback would be appreciated! \\
-My Discord is faefeyfa\#4843.\\ 
+My Discord is \texttt{faefeyfa\#4843}.\\ 
 You can also contact me at \mailto{mckinleyxie@gmail.com}
 \end{abstract}
 
@@ -101,14 +101,14 @@ In the above proof, we proved the following two statements:
 \end{exercise}
 
 \begin{example}
-	Prove that $10 \mid 11^n - 1$ for any $n \in \mathbb{Z}^+$. (Recall that $a \mid b$ means that $a$ divides $b$.)
+	Prove that $10 \mid 11^n - 1$ for any $n \in \mathbb{Z}^+$. (Recall that $a \mid b$ if $a$ divides $b$.)
 \end{example}
 \begin{proof}
 	Once again, we will use induction. The base case is simple; 10 clearly divides $11-1$.
 
 	For the inductive step, suppose $10 \mid 11^{k-1} - 1$ for some integer $k \in \mathbb{Z}^+$. From this, we want to show that $10 \mid 11^k - 1$. Well,
 	\[10 \mid 11^{k-1} - 1 \implies 10 \mid 11 \cdot (11^{k-1} - 1) = 11^k - 11 \]
-	And if $10 \mid 11^k - 11$ then obviously $10 \mid 11^k - 1$ and we are done.
+	And if $10 \mid 11^k - 11$ then $10 \mid 11^k - 1$ and we are done.
 
 \end{proof}
 \begin{remark*}
@@ -119,7 +119,10 @@ In the above proof, we proved the following two statements:
 \end{remark*}
 
 \begin{exercise}
-	Prove that $3 \mid 4^{n} - 7$ for $n \geq 2$
+	Prove that $3 \mid 4^{n} - 7$ for $n \geq 2$ (where $n \in \mathbb{Z}$)
+\begin{exercise}
+	Prove that, in general, $ a \mid {\left(a+1\right)}^n + \left(a-1\right)$
+\end{exercise}
 \end{exercise}
 
 
@@ -137,8 +140,8 @@ Some of these problems (especially the later ones) are pretty hard, don't worry 
 
 
 \begin{u_problem}
-	Prove that \[\frac{a_1 + a_2 + \cdots + a_n}{n} \geq \sqrt[n]{a_1 a_2 \cdots a_n}\] (This is known as the Arithmetic Mean -- Geometric Mean inequality, or AM--GM)  \\
-	Hint: Regular induction won't work here. The solution uses something called Cauchy Induction, which involves showing that $n=k$ works implies that $n=2k$ works and $n=k-1$ works.
+	Given that $\frac{a+b}{2} \geq \sqrt{ab}$ for positive reals $a$ and $b$, prove that \[\frac{a_1 + a_2 + \cdots + a_n}{n} \geq \sqrt[n]{a_1 a_2 \cdots a_n}\] (This is known as the Arithmetic Mean -- Geometric Mean inequality, or AM--GM.)  \\
+	Hint: Regular induction won't work here. The solution uses something called Cauchy Induction, which involves showing that $n=k$ works implies that both $n=2k$ works and $n=k-1$ works, instead of $n=k+1$.
 \end{u_problem}
 \section{Sources (and helpful links)}
 \url{https://brilliant.org/wiki/induction/} \\
