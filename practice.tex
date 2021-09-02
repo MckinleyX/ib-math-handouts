@@ -2,6 +2,7 @@
 \usepackage[sexy]{evan}
 \usepackage{graphicx}
 \usepackage{wrapfig}
+\usepackage{listings}
 \graphicspath{ {./build/} }
 
 \author{Mckinley Xie}
@@ -64,50 +65,47 @@ Here are my two problems!
 	
 \end{proof}
 
-\begin{verbatim}
-	\begin{example*} %this is from evan.sty
-		[2020 IMO Shortlist C1]
-		Let $n$ be a positive integer. 
-		Find the number of permutations 
-		$a_1, a_2, \dots a_n$ of the sequence $1,2,\dots n$ 
-		satisfying 
-		\[a_1 \leqslant 2a_2 \leqslant 3a_3 \leqslant \dots \leqslant na_n\]
-	\end{example*}
+\begin{lstlistings}
+\begin{example*} %this is from evan.sty
+	[2020 IMO Shortlist C1]
+	Let $n$ be a positive integer. 
+	Find the number of permutations 
+	$a_1, a_2, \dots a_n$ of the sequence $1,2,\dots n$ 
+	satisfying 
+	\[a_1 \leqslant 2a_2 \leqslant 3a_3 \leqslant \dots \leqslant na_n\]
+\end{example*}
 
-	\begin{proof} %also from evan.sty
-		We claim that the number of permutations
-		is the $n^\text{th}$ fibonacci number, $F_n$, 
-		defined as $F_0 = F_1 = 1, F_n = F_{n-2} + F_{n-1}$.
-		\begin{claim*} % evan.sty
-			If $a_i = n$, then $i \geq n-1$.
-		\end{claim*}
-		\begin{proof}
-		Suppose that $a_i = n$. 
-		Then $\{a_{i+1} \dots a_n\}$ must be a permutation of 
-		$\{ i, i+1, \dots n-1\}$.
-		$i$ must be at location $n$,
-		which implies that $in = (i+1)a_{n+1} = \cdots = ni$, 
-		which is clearly impossible for $i < n-1$.
-		\end{proof}
-
-		To finish we will use strong(-ish?) induction.
-		Clearly the claim is true for $n=1$ and $n=2$.
-		Now, suppose the claim is true for some $n-2$ and $n-1$.
-		Now, we will use casework on the position of $n$.
-
-		\textbf{Case 1.} If $a_n = n$ the number of permutations 
-		satisfying the condition is equivalent to $F_{n-1}$ 
-		since $n^2$ is greater than any other term in the inequality.
-
-		\textbf{Case 2.} If $a_{n-1} = n$, then 
-		$na_n \geq n(n-1) \implies a_{n} \geq n-1$, 
-		and now $n(n-1)$ is greater than or equal to 
-		any other terms in the inequality, 
-		so the number of permutations in this case is $F_{n-2}$.
-
-		The sum of these are $F_{n-1} + F_{n-2} = F_n$ and we are done.
+\begin{proof} %also from evan.sty
+	We claim that the number of permutations is the $n^\text{th}$ fibonacci number, $F_n$, defined as $F_0 = F_1 = 1, F_n = F_{n-2} + F_{n-1}$.
+	\begin{claim*} % evan.sty
+		If $a_i = n$, then $i \geq n-1$.
+	\end{claim*}
+	\begin{proof}
+	Suppose that $a_i = n$. 
+	Then $\{a_{i+1} \dots a_n\}$ must be a permutation of $\{ i, i+1, \dots n-1\}$.
+	$i$ must be at location $n$,
+	which implies that $in = (i+1)a_{n+1} = \cdots = ni$, 
+	which is clearly impossible for $i < n-1$.
 	\end{proof}
-\end{verbatim}
+
+	To finish we will use strong(-ish?) induction.
+	Clearly the claim is true for $n=1$ and $n=2$.
+	Now, suppose the claim is true for some $n-2$ and $n-1$.
+	Now, we will use casework on the position of $n$.
+
+	\textbf{Case 1.} If $a_n = n$ the number of permutations 
+	satisfying the condition is equivalent to $F_{n-1}$ 
+	since $n^2$ is greater than any other term in the inequality.
+
+	\textbf{Case 2.} If $a_{n-1} = n$, then 
+	$na_n \geq n(n-1) \implies a_{n} \geq n-1$, 
+	and now $n(n-1)$ is greater than or equal to 
+	any other terms in the inequality, 
+	so the number of permutations in this case is $F_{n-2}$.
+
+	The sum of these are $F_{n-1} + F_{n-2} = F_n$ and we are done.
+\end{proof}
+\end{lstlistings}
 
 
 \begin{example*}
@@ -124,9 +122,9 @@ Here are my two problems!
 	Because this is true $\forall x,y$ in the given range, then each $a_x$ corresponds to a unique ordered pair $(L(x), L'(x))$.
 
 	Now, suppose our claim is not true, and that there do not exist such subsequences. Then $\forall x $ such that $1 \leq x \leq mn+1$, $1 \leq L(x) \leq m$ and $1 \leq L'(x) \leq n$. However, observe that there are only $mn$ ordered pairs $(L(x), L'(x))$ satisfying that condition, so by the pigeonhole principle such a subsequence exists, and we are done.
-
 \end{proof}
-\begin{verbatim}
+
+\begin{lstlisting}
 \begin{example*}
 	[Erd\H{o}s-Szekeres]
 	Prove that, in a sequence of $mn + 1$ distinct integers, 
@@ -157,6 +155,6 @@ Here are my two problems!
 	so by the pigeonhole principle such a subsequence exists, 
 	and we are done.
 \end{proof}
-\end{verbatim}
+\end{lstlisting}
 
 \end{document}
