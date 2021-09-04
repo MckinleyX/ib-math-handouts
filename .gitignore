@@ -1,8 +1,2 @@
-*.aux
-*.fdb_latexmk
-*.fls
-*.log
-*.out
-*.pre
-*.synctex.gz
-*.toc
+build/*
+!build/*.pdf
