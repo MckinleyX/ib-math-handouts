@@ -6,4 +6,4 @@ Click on `build/` to see the pdfs.
 
 I hope they help!
 
-<sub><sup> I rely pretty heavily on `evan.sty` by Evan Chen. You can find more information about that [here](https://web.evanchen.cc/faq-latex.html#L-3)
+<sub> I rely pretty heavily on `evan.sty` by Evan Chen. You can find more information about that [here](https://web.evanchen.cc/faq-latex.html#L-3) </sub>
