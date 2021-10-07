@@ -1,0 +1,286 @@
+\documentclass{scrartcl}
+\usepackage[sexy]{evan}
+\usepackage{tikz}
+\usepackage{tikzducks}
+\usepackage{epigraph}
+\usepackage{asymptote}
+\title{Counting}
+\author{Mckinley Xie}
+
+\renewcommand{\epigraphrule}{0pt}
+\renewcommand{\epigraphflush}{center}
+\renewcommand{\textflush}{center}
+\renewcommand{\sourceflush}{flushright}
+
+\begin{document}
+\maketitle
+	\epigraph{``I trust the Russians.''}{ --- Evan Chen}
+	Counting is a subfield of combinatorics that concerns with... as you might imagine, counting things. I'll be switching interchangably between the words ``counting'' and ``combo'' through this handout..
+
+	First, three things to get out of the way:
+	\begin{enumerate}
+		\item \textbf{Please tell me if these explanations skip over anything or seem confusing.} I tend to do that a bit.
+
+		\item Because combo is not really taught in school at all, I'm starting from the very basics. \textbf{If you feel like you already understand a section then it's fine to skip that section.} 
+
+		\item \textbf{Do not memorize formulas}. Counting at this level is pretty intuitive. If you can understand why a formula works then you can go by without using them, and if you \emph{really} need to then you can just Google it.
+	\end{enumerate}
+
+	Combo is a \emph{huge} field. If you want a proper book on this stuff, check out Art of Problem Solving's \href{https://artofproblemsolving.com/store/book/intro-counting}{Intro to Counting and Probability}\footnote{I have a copy that I'm currently lending out to someone else. If I get it back I'll update this PDF. I also have a copy of \emph{Competition Math for Middle School}, which actually covers all of the stuff I have here, and more, friendlier than I could introduce it.}
+
+	As per usual, my Discord is \texttt{faefeyfa\#4843} and my email is \mailto{mckinleyxie@gmail.com}.
+	\tableofcontents
+	\section{Basics}
+	\subsection{The additive principle}
+	\begin{example}
+		Tim is a duck. He has 4 top hats and 6 bow ties. How many ways can he wear exactly one piece of clothing?
+	\end{example}
+	\begin{soln}
+		Well, \\
+	\foreach \i in {black,red,blue,teal} {
+		\begin{tikzpicture}
+			\duck[tophat=\i,scale=0.6,tshirt=white,jacket=gray,lapel=black!65,buttons=black!65]
+		\end{tikzpicture}
+	}
+	\foreach \i in {black,red,blue,teal,orange,purple}{
+		\begin{tikzpicture}
+			\duck[bowtie=\i,scale=0.6,tshirt=white,jacket=gray,lapel=black!65,buttons=black!65]
+		\end{tikzpicture}
+		}
+		The answer is 10.
+	\end{soln}
+	This idea is formalized \textbf{the additive principle:}
+	\begin{theorem}
+		[Stuff adds]
+		If an event $A$ can occur in $m$ ways, and an event $B$ can occur in $n$ ways (each distinct from $A$), then the event ``$A$ or $B$'' can occur in $m + n$ ways.
+	\end{theorem}
+
+	\subsection{The multiplicative principle}
+	\begin{example}
+		Tim is feeling extra snazzy today and would like to wear a top hat \emph{and} a bow tie. How many ways can he do this? (As a reminder, Tim has 4 top hats and 6 bow ties.)
+	\end{example}
+	\begin{soln}
+		Consider the following: \\
+		\foreach \i in {black,red,blue,teal} {
+			\foreach \j in {black,red,blue,teal,orange,purple}{
+			\begin{tikzpicture}
+				\duck[scale=0.6,tophat=\i,bowtie=\j,tshirt=white,jacket=gray,lapel=black!65,buttons=black!65]
+			\end{tikzpicture}
+			}
+			\newline
+		}
+	So the answer is $4\cdot6 = 24$.
+	\end{soln}
+	This idea is formalized as \textbf{the multiplicative principle:}
+	\begin{theorem}
+		[Stuff multiplies]
+		If an event $A$ can occur in $m$ ways, and an event $B$ can occur in $n$ ways, then the event ``$A$ then $B$'' can occur in $m \cdot n$ ways. 
+	\end{theorem}
+	\begin{exercise}
+		Take a moment to convince yourself why this is true.
+	\end{exercise}
+	\begin{exercise}
+		Tim's friend, Sandy, likes shoes. She has 4 different pairs of left shoes and 5 different pairs of right shoes. If Sandy has no fashion sense how many ways can she wear a left shoe and a right shoe?
+	\end{exercise}
+	\begin{exercise}
+		Due to extensive reforms, the alphabet of the country of Oceania now has five letters: A, B, C, D, and E. If a \emph{word} consists of an alternating series of consonants and vowels, starting with a consonant, how many 5-letter words are there?
+	\end{exercise}
+
+	\section{A bit harder}
+	\subsection{Casework}
+		Casework is an essential technique in combanatorics. It's basically what it says on the tin; given a problem, split it up into cases, then add them all up for your final answer.
+		\begin{example}
+			How many squares can be formed in the following diagram by choosing 4 distinct vertices?
+\bigskip
+
+\begin{asy}
+	unitsize(0.75cm);
+	for(int ii = 0; ii < 4; ++ii)
+	{
+		for(int jj = 0; jj < 4; ++jj)
+		{
+			dot((ii,jj));
+		}
+	}
+\end{asy}
+		\end{example}
+		\begin{soln}
+			We split this up into the following cases: 
+			\bigskip
+
+\begin{asy}
+	unitsize(0.75cm);
+	draw((0,0)--(1,0)--(1,1)--(0,1)--cycle);
+	for(int ii = 0; ii <= 1; ++ii){
+		for(int jj = 0; jj <= 1; ++jj){
+		dot((ii,jj)); }}
+	draw((2,-0.5)--(4,-0.5)--(4,1.5)--(2,1.5)--cycle);
+	for(real ii = 2; ii <= 4; ++ii){
+		for(real jj = -0.5; jj <= 1.5; ++jj){
+		dot((ii,jj)); }}
+	draw((5,-1)--(8,-1)--(8,2)--(5,2)--cycle);
+	for(real ii = 5; ii <= 8; ++ii){
+		for(real jj = -1; jj <= 2; ++jj){
+		dot((ii,jj)); }}
+	draw((9,0.5)--(10,-0.5)--(11,0.5)--(10,1.5)--cycle);
+	for(real ii = 9; ii <= 11; ++ii){
+		for(real jj = -0.5; jj <= 1.5; ++jj){
+		dot((ii,jj)); }}
+	draw((12,0)--(13,2)--(15,1)--(14,-1)--cycle);
+	for(real ii = 12; ii <= 15; ++ii){
+		for(real jj = -1; jj <= 2; ++jj){
+		dot((ii,jj)); }}
+\end{asy}
+
+The individual cases are easily countable; $9+4+1+4+2=\boxed{20}$.
+		\end{soln}
+
+		Casework is good when you have no idea what to do. It always works, but sometimes it's too slow to be practical.
+	\subsection{Permutations}
+	\begin{example}
+		Suppose I have 6 books, and I want to gift one book each to two of my friends.  How many ways can I do that?
+	\end{example}
+	\begin{soln}
+		Well, I can give the first person any one of 6 books. Then I can give the second person any one of 5 books not given to the first person. By the multiplicative principle this leaves us with a total of $6 \cdot 5 = \boxed{30}$.
+	\end{soln}
+	\begin{exercise}
+		Once again, take a moment to convince yourself that this is intuitively true, and that we haven't overcounted anything.
+	\end{exercise}
+	\begin{example}
+		How many ways are there to arrange my remaining 4 books on my bookshelf?
+	\end{example}
+	\begin{soln}
+	There are 4 ways to choose the first book, 3 ways to choose the second book, 2 ways to choose the third book, and just one way to put the last book, so we have an answer of $4! = \boxed{24}$.
+	\end{soln}
+	\begin{exercise}
+		How many 4-digit numbers can we make by rearranging the digits 1,2,3,4,5,6?
+	\end{exercise}
+	\subsection{Permutations with Restrictions}
+	\begin{example}
+		How many \emph{even} numbers contain each of the digits 1,2,3,4,5 exactly once?
+	\end{example}
+	\begin{soln}
+		Let's try going backwards. For the last digit we have 2 choices (2 or 4), and then for the next four choices we have 4,3,2,1 choices respectively, for a final answer of \boxed{48}.
+	\end{soln}
+
+	\begin{example}
+		Suppose that we want to seat Alice, Bob, Carol, and David in a row, at a movie theatre. How many ways are there to do this such that Alice and Bob are sitting next to each other?
+	\end{example}
+	\begin{soln}
+		We will imagine duct-taping Alice and Bob together into one person. There are $3!$ ways to arrange the now-3 people, and then $2$ ways that we can swap Alice and Bob, for a total of $\boxed{12}$.
+	\end{soln}
+	\begin{exercise}
+		How many ways are there to rearrange the letters of $FOOT$ such that there is a double-O?
+	\end{exercise}
+	\begin{exercise}
+		How many way are there to seat 7 people around a round table, such that rotations are considered distinct?
+	\end{exercise}
+	
+	\subsection{Combinations}
+	\begin{example}
+		If I now want to give any 2 of my books to a friend, how many ways can I do this?
+	\end{example}
+	\begin{soln}
+		We have 4 choices for the first book, and 3 for the second, for a final answer of 12.
+
+		But wait! For any pair of books $(a,b)$ that we choose, we count it twice! We count it once as $(a,b)$ and a second time as $(b,a)$. This means that we need to divide by 2, so our final answer is 
+		\[\frac{4 \cdot 3}{2} = \boxed{6}\]
+	\end{soln}
+
+	\begin{example} 
+		Patricia frequently misspells the word $MISS$. How many ways can she misspell it, if all the same letters are used, but in the wrong order?
+	\end{example}
+	\begin{soln}
+		At first, we may be tempted to say that the answer is $8!$ and call it a day. However, this doesn't exactly work. Suppose we label the double letters os our word is $MIS_1S_2$. Note that for any spelling, say, $IS_1MS_2$, it has an identical copy, $IS_2MS_1$, that is also counted, so we must divide by 2 to make sure that $ISMS$ is only counted once. Because every permutation of letters has 2 $S$s we can just divide everything by two, and subtract 1 for the correct spelling of the letters, for a final answer of $\frac{4!}{2!} = 12$.
+	\end{soln}
+	\begin{exercise}
+		Unfortunately, Patricia also has trouble spelling the word $MISSPELL$. How many ways can she misspell this word?
+	\end{exercise}
+
+	\section{Miscellaneous Techniques}
+	Here are a few cool tricks I've picked up here and there. They aren't here for you to memorize, but rather understand (and hopefully use). 
+
+	\subsection{Complementary Counting}
+	Sometimes directly counting something is not the best way. Consider the following example:
+	\begin{example}
+		What is the probability that, after three dice rolls, we have rolled at least one 1?
+	\end{example}
+	\begin{soln}
+	One way to do this problem is casework. We can find the probability that we roll exactly one 1, two 1s, and three 1s. However, there is a cleaner solution:
+
+	Observe that if we do \emph{not} have at least one 1, then we have rolled zero ones. This occurs with probability ${\left(\frac{5}{6}\right)}^3$, so our answer is $\boxed{1 - {\left(\tfrac{5}{6}\right)}^3}$.
+	\end{soln}
+
+Sometimes we come on nasty answers like these. Don't bother calculating $1 - {\left(\frac{5}{6}\right)}^3$ when you're doing exercises. I mean, if you enjoy doing tedious calculations, go ahead, but as long as you get to this point you're basically just done.
+	\begin{example}
+		In a group of 8 people, we want to create a committee of 4 people. However, Alice and Bob hate each other and will not be in the same comittee. How many ways can we do this?
+	\end{example}
+	\begin{soln}
+		The number of ways to form a subcommittee of 4 people is $\binom{8}{4}$, but we've counted all the cases where both Alice and Bob are in the commitee. This happens in $\binom{6}{4}$ of the cases so our final answer is $\boxed{\tbinom{8}{4} - \tbinom{6}{4}}$.
+	\end{soln}
+
+
+
+	\subsection{Stars and Bars}
+	Here is a really cool trick seen in competition math. It was taught to me as ``sticks and stones'' but I like the rhyme so I'm calling it ``stars and bars''.
+	\begin{example}
+		Suppose Sadaf has 6 pieces of chocolate she would like to distribute chocolate to 4 of her friends. How many ways can she do this?
+	\end{example}
+	\begin{soln}
+		Ladies and Gentlemen, I present: Stars and Bars!
+		\[\mid\mid\mid\bigstar\bigstar\bigstar\bigstar\bigstar\]
+
+		For any configuration of chocolates you might give your four friends, it corresponds with exactly one arrangement of these symbols, and every arrangement of these symbols corresponds to exactly one configuration of chocolates (When two things map to each other like this, it is called a \emph{bijection}). We have 6 candies and 3 separators to separate the 6 candies into 4 groups.
+		
+		Suppose we want to give 1 chocolate to the first person, 2 to the second, 3 to the third, and none to the last:
+		\[\bigstar\mid\bigstar\bigstar\mid\bigstar\bigstar\bigstar\mid\]
+		Or maybe 1 chocolate to the first, none to the second, 1 to the third, and 4 to the last:
+		\[\bigstar\mid\mid\bigstar\mid\bigstar\bigstar\bigstar\bigstar\]
+		There are $\frac{8!}{3!5!} = \boxed{\tbinom{8}{3}}$ ways to arrange the stars and bars, and we are done.
+	\end{soln}
+
+	\begin{exercise}
+		Play around with a few examples -- are you convinced that this is in fact a bijection?
+	\end{exercise}
+
+	\section{Problems}
+	\begin{problem} I have 3 math books, 2 history books, and 1 fiction book. If I want to keep books of the same genre together, how many ways can I arrange these books on by bookshelf?
+	\end{problem}
+	\begin{problem}
+		Come up with an argument for why the binomial theorem works.
+	\end{problem}
+	\begin{problem}
+		Sadaf is back with more chocolate! She now has 12 pieces of chocalate to distribute among her four friends. However, she would feel bad if none of them could get chocolate. How many ways are there for her to distribute her chocolate if everybody gets at least one chocolate?
+	\end{problem}
+	\section{Challenge Problems}
+	\begin{problem}
+		Sally the spider has 8 socks and 8 shoes. In how many orders can Sally put on her footwear such that she always puts on a sock before a shoe?
+	\end{problem}
+	\begin{problem}
+		Prove that
+		\[\binom{n}0 + \binom{n}1 + \cdots + \binom{n}{n-1} + \binom{n}{n} = 2^n\]
+		Hint: Consider the number of subsets of the set $\{1,2,\dots ,n\}$
+	\end{problem}
+	\begin{problem}
+		Consider the following diagram: \\
+\begin{asy}
+	unitsize(1cm);
+	int x = 5;
+	int y = 5;
+	for(int ii=0; ii<=y; ++ii)
+	{
+		draw((0,ii)--(x,ii));
+	}
+	for(int ii = 0; ii <= x; ++ii)
+	{
+		draw((ii,0)--(ii,y));
+	}
+	label("$A$",(0,0),NW,fontsize(14pt));
+	label("$B$",(x,y),SE,fontsize(14pt));
+\end{asy}
+
+How many paths are there from point $A$ to point $B$ along the grid, moving only up and to the right?
+\end{problem}
+\section{Sources and additional links}
+\url{https://www.nicecontest.xyz/static/media/NJ1.655ca2cf.pdf} --- Specifically, the second chapter. Somewhat harder.
+\end{document}
