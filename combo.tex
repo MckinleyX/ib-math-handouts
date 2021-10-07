@@ -186,32 +186,32 @@ The individual cases are easily countable; $9+4+1+4+2=\boxed{20}$.
 	\begin{soln}
 		We have 4 choices for the first book, and 3 for the second, for a final answer of 12.
 
-		But wait! For any pair of books $(a,b)$ that we choose, we count it twice! We count it once as $(a,b)$ and a second time as $(b,a)$. This means that we need to divide by 2, so our final answer is 
-		\[\frac{4 \cdot 3}{2} = \boxed{6}\]
+		But wait! For any pair of books $(a,b)$ that we choose, we count it twice! We count it once as $(a,b)$ and a second time as $(b,a)$. This means that we need to divide by 2!, so our final answer is 
+		\[\frac{4 \cdot 3}{2!} = \boxed{6}\]
 	\end{soln}
 
 	\begin{example} 
 		Patricia frequently misspells the word $MISS$. How many ways can she misspell it, if all the same letters are used, but in the wrong order?
 	\end{example}
 	\begin{soln}
-		At first, we may be tempted to say that the answer is $8!$ and call it a day. However, this doesn't exactly work. Suppose we label the double letters os our word is $MIS_1S_2$. Note that for any spelling, say, $IS_1MS_2$, it has an identical copy, $IS_2MS_1$, that is also counted, so we must divide by 2 to make sure that $ISMS$ is only counted once. Because every permutation of letters has 2 $S$s we can just divide everything by two, and subtract 1 for the correct spelling of the letters, for a final answer of $\frac{4!}{2!} = 12$.
+		At first, we may be tempted to say that the answer is $4!-1$ and call it a day. However, this doesn't exactly work. Suppose we label the double letters os our word is $MIS_1S_2$. Note that for any spelling, say, $IS_1MS_2$, it has an identical copy, $IS_2MS_1$, that is also counted, so we must divide by 2 to make sure that $ISMS$ is only counted once. Because every permutation of letters has 2 $S$s we can just divide everything by two, and subtract 1 for the correct spelling of the letters, for a final answer of $\frac{4!}{2!} = 12$.
 	\end{soln}
 	\begin{exercise}
 		Unfortunately, Patricia also has trouble spelling the word $MISSPELL$. How many ways can she misspell this word?
 	\end{exercise}
 
-	\section{Miscellaneous Techniques}
-	Here are a few cool tricks I've picked up here and there. They aren't here for you to memorize, but rather understand (and hopefully use). 
+	\section{A few tricks}
+	Not necessary to know, but may help quickly solve otherwise difficult problems.
 
 	\subsection{Complementary Counting}
 	Sometimes directly counting something is not the best way. Consider the following example:
 	\begin{example}
-		What is the probability that, after three dice rolls, we have rolled at least one 1?
+		Paul flips a fair coin 8 times. In how many ways can he get at least 2 heads?
 	\end{example}
 	\begin{soln}
-	One way to do this problem is casework. We can find the probability that we roll exactly one 1, two 1s, and three 1s. However, there is a cleaner solution:
-
-	Observe that if we do \emph{not} have at least one 1, then we have rolled zero ones. This occurs with probability ${\left(\frac{5}{6}\right)}^3$, so our answer is $\boxed{1 - {\left(\tfrac{5}{6}\right)}^3}$.
+Well, the direct way to get an answer is to just find
+\[\binom{8}{2}+\binom{8}{3}+\binom{8}{4}+\binom{8}{5}+\binom{8}{6}+\binom{8}{7}+\binom{8}{8}\]
+However, this looks painful and tedious. The trick is to realize that there are $2^8$ total possibilities, but only $\binom{8}{0} + \binom{8}{1}$ of them do not work, for an answer of $2^8 - 9 = \boxed{247}$.
 	\end{soln}
 
 Sometimes we come on nasty answers like these. Don't bother calculating $1 - {\left(\frac{5}{6}\right)}^3$ when you're doing exercises. I mean, if you enjoy doing tedious calculations, go ahead, but as long as you get to this point you're basically just done.
