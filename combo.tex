@@ -140,6 +140,7 @@ The individual cases are easily countable; $9+4+1+4+2=\boxed{20}$.
 
 		Casework is good when you have no idea what to do. It always works, but sometimes it's too slow to be practical.
 	\subsection{Permutations}
+	Permutations are just repeated usages of the multiplicative principle, counting down. This is better explained with a bunch of examples:
 	\begin{example}
 		Suppose I have 6 books, and I want to gift one book each to two of my friends.  How many ways can I do that?
 	\end{example}
@@ -159,11 +160,15 @@ The individual cases are easily countable; $9+4+1+4+2=\boxed{20}$.
 		How many 4-digit numbers can we make by rearranging the digits 1,2,3,4,5,6?
 	\end{exercise}
 	\subsection{Permutations with Restrictions}
+	Sometimes it's not as simple as just starting at a number and counting down.
+
 	\begin{example}
 		How many \emph{even} numbers contain each of the digits 1,2,3,4,5 exactly once?
 	\end{example}
 	\begin{soln}
-		Let's try going backwards. For the last digit we have 2 choices (2 or 4), and then for the next four choices we have 4,3,2,1 choices respectively, for a final answer of \boxed{48}.
+		The normal way doesn't work; We might try taking 5 choices for the first number, 4 for the second, \dots 1 for the last, but our number isn't necessarily even. Even if we back up a bit, we might not necessarily have 2 choices for the second-to-last, digit, etc.
+
+		Instead, let's try going backwards. For the last digit we have 2 choices (2 or 4), and then for the next four choices we have 4,3,2,1 choices respectively, for a final answer of \boxed{48}.
 	\end{soln}
 
 	\begin{example}
@@ -180,8 +185,9 @@ The individual cases are easily countable; $9+4+1+4+2=\boxed{20}$.
 	\end{exercise}
 	
 	\subsection{Combinations}
+	And sometimes the restrictions are even stronger.
 	\begin{example}
-		If I now want to give any 2 of my books to a friend, how many ways can I do this?
+		If I now want to give any 2 of my 4 books to a friend, how many ways can I do this?
 	\end{example}
 	\begin{soln}
 		We have 4 choices for the first book, and 3 for the second, for a final answer of 12.
@@ -189,19 +195,41 @@ The individual cases are easily countable; $9+4+1+4+2=\boxed{20}$.
 		But wait! For any pair of books $(a,b)$ that we choose, we count it twice! We count it once as $(a,b)$ and a second time as $(b,a)$. This means that we need to divide by 2!, so our final answer is 
 		\[\frac{4 \cdot 3}{2!} = \boxed{6}\]
 	\end{soln}
+	\begin{exercise}
+		What if I have 5 books and want to give 3 of them away?
+	\end{exercise}
 
-	\begin{example} 
-		Patricia frequently misspells the word $MISS$. How many ways can she misspell it, if all the same letters are used, but in the wrong order?
+	\begin{example}
+		How many ways are there to rearrange the letters in the word $TOOT$?
 	\end{example}
 	\begin{soln}
-		At first, we may be tempted to say that the answer is $4!-1$ and call it a day. However, this doesn't exactly work. Suppose we label the double letters os our word is $MIS_1S_2$. Note that for any spelling, say, $IS_1MS_2$, it has an identical copy, $IS_2MS_1$, that is also counted, so we must divide by 2 to make sure that $ISMS$ is only counted once. Because every permutation of letters has 2 $S$s we can just divide everything by two, and subtract 1 for the correct spelling of the letters, for a final answer of $\frac{4!}{2!} = 12$.
+		We have 4 choices for the first letter, 3 for the second, \dots 1 for the last, for a total of 4!. However, once again, we have overcounted. We've quadruple-counted every word: if we label our letters so our word is $T_1O_1O_2T_2$, then there are $2 \cdot 2 = 4$ copies of the same word that we can obtain by swapping $T_1$ and $T_2$ and/or $O_1$ and $O_2$.
 	\end{soln}
 	\begin{exercise}
-		Unfortunately, Patricia also has trouble spelling the word $MISSPELL$. How many ways can she misspell this word?
+		What about the word $TOOOT$?
+	\end{exercise}
+
+	You might have noticed something suprising --- The number of ways to choose $r$ books out of $n$ total books is the same as the number of ways to rearrange a word with $r$ T's and $n-r$ O's. Why do you think this is the case?
+	This is because, for any arrangement of $T$s and $O$s, imagine assigning the first letter to the first book, the second letter to the second book, etc. There are $r$ $T$'s, so give away all the books with $r$ $T$'s and it's fairly clear there's a one-to-one mapping between strings and ways to select books.
+
+	(Mappings like these are called \emph{bijections}.)
+	
+	``The number of ways to choose $r$ things from $n$ total things'' is common enough to deserve its own notation, $\binom{n}{r}$ (read ``$n$ choose $r$''), and $ \binom{n}{r} = \frac{n!}{(n-r)!r!}$
+
+	\begin{exercise}
+		Without referencing the formula, why does $\binom{n}{r} = \binom{n}{n-r}$?
+	\end{exercise}
+	\begin{exercise}
+		Patricia has trouble spelling the word $MISSPELL$. How many ways can she misspell this word, if all the same letters are used, but in the wrong order?
+	\end{exercise}
+	\begin{exercise}
+		Prove that
+		\[\binom{n}{0} + \binom{n}{1} + \cdots + \binom{n}{n} = 2^n\]
+		(Hint: Consider the subsets of a set of size $n$.)
 	\end{exercise}
 
 	\section{A few tricks}
-	Not necessary to know, but may help quickly solve otherwise difficult problems.
+	Not necessary to know, but may help quickly solve otherwise difficult or time-consuming problems.
 
 	\subsection{Complementary Counting}
 	Sometimes directly counting something is not the best way. Consider the following example:
@@ -211,21 +239,20 @@ The individual cases are easily countable; $9+4+1+4+2=\boxed{20}$.
 	\begin{soln}
 Well, the direct way to get an answer is to just find
 \[\binom{8}{2}+\binom{8}{3}+\binom{8}{4}+\binom{8}{5}+\binom{8}{6}+\binom{8}{7}+\binom{8}{8}\]
-However, this looks painful and tedious. The trick is to realize that there are $2^8$ total possibilities, but only $\binom{8}{0} + \binom{8}{1}$ of them do not work, for an answer of $2^8 - 9 = \boxed{247}$.
+However, this looks painful and tedious. The trick is to realize that there are $2^8$ total outcomes, but only $\binom{8}{0} + \binom{8}{1} = 9$ of them do not work, for an answer of $2^8 - 9 = \boxed{247}$.
 	\end{soln}
 
-Sometimes we come on nasty answers like these. Don't bother calculating $1 - {\left(\frac{5}{6}\right)}^3$ when you're doing exercises. I mean, if you enjoy doing tedious calculations, go ahead, but as long as you get to this point you're basically just done.
 	\begin{example}
 		In a group of 8 people, we want to create a committee of 4 people. However, Alice and Bob hate each other and will not be in the same comittee. How many ways can we do this?
 	\end{example}
 	\begin{soln}
-		The number of ways to form a subcommittee of 4 people is $\binom{8}{4}$, but we've counted all the cases where both Alice and Bob are in the commitee. This happens in $\binom{6}{4}$ of the cases so our final answer is $\boxed{\tbinom{8}{4} - \tbinom{6}{4}}$.
+		The number of ways to form a subcommittee of 4 people is $\binom{8}{4}$, but we've included cases where both Alice and Bob are in the commitee. This happens in $\binom{6}{4}$ of the cases so our final answer is $\boxed{\tbinom{8}{4} - \tbinom{6}{4}}$.
 	\end{soln}
 
 
 
 	\subsection{Stars and Bars}
-	Here is a really cool trick seen in competition math. It was taught to me as ``sticks and stones'' but I like the rhyme so I'm calling it ``stars and bars''.
+	Here is a really cool trick seen in competition math. It was taught to me as ``sticks and stones'' but I like rhyme so I'm using the name ``stars and bars''.
 	\begin{example}
 		Suppose Sadaf has 6 pieces of chocolate she would like to distribute chocolate to 4 of her friends. How many ways can she do this?
 	\end{example}
@@ -233,7 +260,7 @@ Sometimes we come on nasty answers like these. Don't bother calculating $1 - {\l
 		Ladies and Gentlemen, I present: Stars and Bars!
 		\[\mid\mid\mid\bigstar\bigstar\bigstar\bigstar\bigstar\]
 
-		For any configuration of chocolates you might give your four friends, it corresponds with exactly one arrangement of these symbols, and every arrangement of these symbols corresponds to exactly one configuration of chocolates (When two things map to each other like this, it is called a \emph{bijection}). We have 6 candies and 3 separators to separate the 6 candies into 4 groups.
+		For any configuration of chocolates you might give your four friends, it corresponds with exactly one arrangement of these symbols, and every arrangement of these symbols corresponds to exactly one configuration of chocolates . We have 6 candies and 3 separators to separate the 6 candies into 4 groups.
 		
 		Suppose we want to give 1 chocolate to the first person, 2 to the second, 3 to the third, and none to the last:
 		\[\bigstar\mid\bigstar\bigstar\mid\bigstar\bigstar\bigstar\mid\]
