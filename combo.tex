@@ -36,10 +36,10 @@
 	\section{Basics}
 	\subsection{The additive principle}
 	\begin{example}
-		Tim is a duck. He has 4 top hats and 6 bow ties. How many ways can he wear exactly one piece of clothing?
+		Tim is a duck. He has 4 top hats and 6 bow ties. How many ways can he wear exactly one accessory?
 	\end{example}
 	\begin{soln}
-		Well, \\
+		Well, he can either wear 1 of 4 top hats, or 1 of 6 bow ties.  \\
 	\foreach \i in {black,red,blue,teal} {
 		\begin{tikzpicture}
 			\duck[tophat=\i,scale=0.6,tshirt=white,jacket=gray,lapel=black!65,buttons=black!65]
@@ -274,10 +274,13 @@ However, this looks painful and tedious. The trick is to realize that there are 
 	\end{exercise}
 
 	\section{Problems}
-	\begin{problem} I have 3 math books, 2 history books, and 1 fiction book. If I want to keep books of the same genre together, how many ways can I arrange these books on by bookshelf?
+	\begin{problem}
+		Aamir has 5 tennis rackets and he'd like to play his next tennis match with one in each hand. How many ways can he do this?
+	\end{problem}
+	\begin{problem} I have 3 math books, 2 history books, and 1 fiction book. If I want to keep books of the same genre together, how many ways can I arrange these books on my bookshelf?
 	\end{problem}
 	\begin{problem}
-		Come up with an argument for why the binomial theorem works.
+		How many ways are there to seat 6 people around a table, if two of them cannot stand each other, and rotations are not considered distinct?
 	\end{problem}
 	\begin{problem}
 		Sadaf is back with more chocolate! She now has 12 pieces of chocalate to distribute among her four friends. However, she would feel bad if none of them could get chocolate. How many ways are there for her to distribute her chocolate if everybody gets at least one chocolate?
@@ -290,6 +293,14 @@ However, this looks painful and tedious. The trick is to realize that there are 
 		Prove that
 		\[\binom{n}0 + \binom{n}1 + \cdots + \binom{n}{n-1} + \binom{n}{n} = 2^n\]
 		Hint: Consider the number of subsets of the set $\{1,2,\dots ,n\}$
+	\end{problem}
+	\begin{problem}
+		Show that
+		\[\binom{n+1}{r+1} = \binom{n}{r} + \binom{n}{r+1}\]
+		This is known as \emph{Pascal's Identity}.
+	\end{problem}
+	\begin{problem}
+		Come up with an argument for why the binomial theorem works.
 	\end{problem}
 	\begin{problem}
 		Consider the following diagram: \\
