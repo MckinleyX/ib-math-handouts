@@ -1,10 +1,14 @@
 \documentclass{scrartcl}
 \usepackage[sexy]{evan}
-\usepackage{asymptote}
-\usepackage{biblatex}
-\bibliography{references}
+
+\usepackage{asymptote} % For drawing the diagram
+
+\usepackage{biblatex} % For bibliography
+\bibliography{references} % Use references.bib for the bibliography file
+
 \author{Mckinley Xie}
 \title{Unit 2 \LaTeX{} Project}
+
 \begin{document}
 \maketitle
 \begin{example*}
@@ -56,20 +60,20 @@
 	\end{center}
 	\newcommand{\tri}{\triangle}
 
-Observe that $AP=AS$ and $PO=OS$, and $\angle OSA = \angle OPA = 90 ^\circ$\cite{mw_cirtan},
-so $\tri APO \cong \tri ASO$.
+Observe that $AP=AS$ and $PO=OS$, and $\angle OSA = \angle OPA = 90 ^\circ$
+\cite{mw_cirtan}, so $\tri APO \cong \tri ASO$.
 Similarly, $\tri ORD \cong \tri ODS$.
 
 Because $AO$ bisects $\angle POS$ and $DO$ bisects $\angle SOR$,
 $\angle AOD = \frac{180^\circ}{2} = 90^\circ$.
-Because $\angle SAO = \angle OAS$, 
-$\tri AOD \sim \tri ASO$.
+Because $\angle SAO = \angle OAS$, $\tri AOD \sim \tri ASO$.
 Similarly, $\tri OSD \sim \tri AOD$.
 
-Let $r$ be the radius of circle $\omega$ and $c = \frac{SO}{AS}$. Then $AS = \frac{r}{c}$,
-and by similar trinagles $SD = rc$.
+Let $r$ be the radius of circle $\omega$ and $c = \frac{SO}{AS}$. 
+Then $AS = \frac{r}{c}$, and by similar trinagles $SD = rc$.
 
-Repeating this argument for the right-hand side we have $BQ = \frac{r}{d}$, $OQ = r$, and $OC = rd$ for some constant $d$.
+Repeating this argument for the right-hand side we have 
+$BQ = \frac{r}{d}$, $OQ = r$, and $OC = rd$ for some constant $d$.
 
 Let $g$ be the geometric mean of the bases.
 \begin{align*}
@@ -81,6 +85,6 @@ Finally, by AM-GM\cite{mw_amgm} on $\frac{c}d + \frac{d}c$,
 \[ g \geq r\sqrt{1 + 2 + 1} = 2r\]
 And since $2r$ is equal to the height of the trapezium, we are done.
 \end{proof}
-\nocite{mw_simtri}
+\nocite{mw_simtri} 
 \printbibliography
 \end{document}
