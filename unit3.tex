@@ -1,0 +1,99 @@
+\documentclass{scrartcl}
+\usepackage[sexy]{evan}
+\usepackage{asymptote}
+\usepackage{biblatex}
+\bibliography{references}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\usepackage{float}
+\title{Unit 3 \LaTeX{} Project}
+\author{Mckinley Xie}
+\begin{document}
+\maketitle
+\begin{example*}
+	[USAMTS 4/1/33]
+	Let $m,n,k$ be positive integers such that $k \leq mn$.
+	Let $S$ be the set consisting of a $(m+1)$-by-$(n+1)$
+	rectangular array of points on the Cartesian plane with coordinates
+	$(i,j)$ where $i,j$ are integers satisfying $0 \leq i \leq m$ and
+	$0 \leq j \leq n$. The diagram below shows the example
+	where $m=3$ and $n=5$, with the points of $S$ indicated by black dots:
+	\begin{figure}[H]
+\begin{center}
+\begin{asy}
+	unitsize(0.75cm);
+	draw((-2,0)--(7,0),Arrow);
+	draw((0,-2)--(0,7),Arrow);
+
+	for(int ii = 0; ii <= 3; ++ii)
+	{
+		for(int jj = 0; jj <= 5; ++jj)
+		{
+			dot((ii,jj));
+		}
+	}
+	for(int ii = -1; ii <= 6; ++ii)
+	{
+		draw((-1.5,ii)--(6.5,ii),grey);
+		draw((ii,-1.5)--(ii,6.5),grey);
+	}
+	label("$x$",(7,0),E);
+	label("$y$",(0,7),N);
+\end{asy}
+\end{center}
+\caption{$S$ with $m=3$ and $n=5$}
+\end{figure}
+\end{example*}
+\newpage
+\begin{proof}
+	Let $A = (0,0)$, $B = (1,n)$, and $C = (x,y)$, for integral $n,x,y$.
+	
+	Let $D$ be the point on $AB$ such that $CD$ is parallel to the $x$-axis.
+
+	Let $[XYZ]$ denote the area of $\bigtriangleup XYZ$.
+
+	Suppose $k = mi - j$, where $i,j \in \mathbb{Z}$, $i,j \geq 0$, and $j < m$. 
+
+\begin{figure}[H]
+\begin{center}
+\begin{asy}
+	unitsize(1.35cm);
+	draw((-1,0)--(5,0),Arrow);
+	draw((0,-1)--(0,5),Arrow);
+	real h = 4.5;
+	real x = 4;
+	real y = 2;
+	draw((0,0)--(0.5,h)--(x,y)--cycle);
+	dot((0,0));
+	label("$A$",(0,0),SW);
+	dot((0.5,h));
+	label("$B$",(0.5,h),NE);
+	dot((x,y));
+	label("$C$",(x,y),NE);
+	dot((0.5*y/h,y));
+	draw((0.5*y/h,y) -- (x,y));
+	label("$D$",(0.5*y/h,y),SE);
+\end{asy}
+\end{center}
+\caption{Triangle $ABC$}
+\end{figure}
+
+
+Observe that $[ABC] = [ACD] + [BCD] = \frac12CD \cdot y + \frac12CD\cdot(n-y) = \frac12CD\cdot n$.
+
+Since the slope of $AB$ is $n$, $CD = x - \frac{y}n$.
+
+So $[ABC] = \frac12n\left(x - \frac{y}n\right) = \frac12\left(xn - y\right)$.
+
+Let $\ceil*{x}$ denote the least integer greater than $x$.
+
+Since the only thing we're bounded by is that $x,y \in \mathbb{Z}$ such that
+$0 \leq x \leq m$ and $0 \leq y \leq n$, 
+let $x = \ceil*{\frac{k}{n}}$ and $y = xn - k$.
+Then $[ABC] = \frac12\left(xn - y\right) = k$, 
+and we know that $x \leq m$ and $y \leq n$ 
+since $x > m \implies k > mn$ 
+and $y > n \implies \ceil*{\frac{k}n} = x-1$, both of which are contradictions, so such $x,y$ exist, and we are done.
+
+\end{proof}
+
+\end{document}
