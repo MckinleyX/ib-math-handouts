@@ -1,0 +1,90 @@
+\documentclass{scrartcl}
+\usepackage[sexy]{evan}
+
+\usepackage{asymptote} % For drawing the diagram
+
+\usepackage{biblatex} % For bibliography
+\bibliography{references} % Use references.bib for the bibliography file
+
+\author{Mckinley Xie}
+\title{Unit 2 \LaTeX{} Project}
+
+\begin{document}
+\maketitle
+\begin{example*}
+	[Komal Problem B. 5188]
+	Prove that the height of a circumscribed trapezium 
+	cannot be greater than the geometric mean of the bases. 
+\end{example*}
+\begin{proof}
+	Consider the left-hand side of the following diagram:
+	\bigskip
+	\begin{center}
+\begin{asy}
+	import olympiad;
+	unitsize(2cm);
+	draw(unitcircle);
+	pair a = (-0.8,1);
+	pair c = (1.5,-1);
+	pair p = tangent(a,origin,1,2);
+	pair q = tangent(c,origin,1,1);
+	pair r = tangent(c,origin,1,2);
+	pair s = tangent(a,origin,1,1);
+	pair b = extension(a,p,c,q);
+	pair d = extension(a,s,c,r);
+	dot(a);
+	dot(b);
+	dot(c);
+	dot(d);
+	dot(p);
+	dot(q);
+	dot(r);
+	dot(s);
+	dot(origin);
+	label("$A$",a,NW);
+	label("$B$",b,NE);
+	label("$C$",c,SE);
+	label("$D$",d,SW);
+	label("$P$",p,N);
+	label("$Q$",q,E);
+	label("$R$",r,S);
+	label("$S$",s,W);
+	label("$O$",origin,E);
+	label("$\omega$",(0.75,-0.7),E);
+	draw(a--b--c--d--cycle);
+	draw(p--r);
+	draw(a--origin);
+	draw(d--origin);
+	draw(s--origin);
+\end{asy}
+	\end{center}
+	\newcommand{\tri}{\triangle}
+
+Observe that $AP=AS$ and $PO=OS$, and $\angle OSA = \angle OPA = 90 ^\circ$
+\cite{mw_cirtan}, so $\tri APO \cong \tri ASO$.
+Similarly, $\tri ORD \cong \tri ODS$.
+
+Because $AO$ bisects $\angle POS$ and $DO$ bisects $\angle SOR$,
+$\angle AOD = \frac{180^\circ}{2} = 90^\circ$.
+Because $\angle SAO = \angle OAS$, $\tri AOD \sim \tri ASO$.
+Similarly, $\tri OSD \sim \tri AOD$.
+
+Let $r$ be the radius of circle $\omega$ and $c = \frac{SO}{AS}$. 
+Then $AS = \frac{r}{c}$, and by similar trinagles $SD = rc$.
+
+Repeating this argument for the right-hand side we have 
+$BQ = \frac{r}{d}$, $OQ = r$, and $OC = rd$ for some constant $d$.
+
+Let $g$ be the geometric mean of the bases.
+\begin{align*}
+	g &= \sqrt{\left(\frac{r}{c} + \frac{r}{d}\right)\left(rc + rd\right)} \\
+	&= r\sqrt{\left(\frac1c + \frac1d\right)\left(c+d\right)} \\
+	&= r\sqrt{1 + \frac{c}d + \frac{d}c + 1}
+\end{align*}
+Finally, by AM-GM\cite{mw_amgm} on $\frac{c}d + \frac{d}c$,
+\[ g \geq r\sqrt{1 + 2 + 1} = 2r\]
+And since $2r$ is equal to the height of the trapezium, we are done.
+\end{proof}
+\nocite{mw_simtri} 
+\printbibliography
+\end{document}
