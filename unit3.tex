@@ -1,12 +1,21 @@
-\documentclass{scrartcl}
+\documentclass[a4paper,12pt]{scrartcl}
 \usepackage[sexy]{evan}
+\usepackage{mckinley}
 \usepackage{asymptote}
-\usepackage{biblatex}
-\bibliography{references}
+\usepackage[backend=biber,style=alphabetic]{biblatex}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\addbibresource{ref.bib}
+\addbibresource{aux.bib}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\newcommand{\red}{\color{red}}
+\newcommand{\blue}{\color{blue}}
+\newcommand{\black}{\color{black}}
 \usepackage{float}
 \title{Unit 3 \LaTeX{} Project}
 \author{Mckinley Xie}
+\setlength{\marginparwidth}{2cm}
+\emergencystretch=1em
 \begin{document}
 \maketitle
 \begin{example*}
@@ -20,10 +29,12 @@
 	\begin{figure}[H]
 \begin{center}
 \begin{asy}
-	unitsize(0.75cm);
-	draw((-2,0)--(7,0),Arrow);
-	draw((0,-2)--(0,7),Arrow);
-
+	unitsize(0.5cm);
+	for(int ii = -1; ii <= 6; ++ii)
+	{
+		draw((-1.5,ii)--(6.5,ii),grey);
+		draw((ii,-1.5)--(ii,6.5),grey);
+	}
 	for(int ii = 0; ii <= 3; ++ii)
 	{
 		for(int jj = 0; jj <= 5; ++jj)
@@ -31,11 +42,9 @@
 			dot((ii,jj));
 		}
 	}
-	for(int ii = -1; ii <= 6; ++ii)
-	{
-		draw((-1.5,ii)--(6.5,ii),grey);
-		draw((ii,-1.5)--(ii,6.5),grey);
-	}
+	draw((-2,0)--(7,0),Arrow);
+	draw((0,-2)--(0,7),Arrow);
+
 	label("$x$",(7,0),E);
 	label("$y$",(0,7),N);
 \end{asy}
@@ -43,7 +52,6 @@
 \caption{$S$ with $m=3$ and $n=5$}
 \end{figure}
 \end{example*}
-\newpage
 \begin{proof}
 	Let $A = (0,0)$, $B = (1,n)$, and $C = (x,y)$, for integral $n,x,y$.
 	
@@ -56,7 +64,7 @@
 \begin{figure}[H]
 \begin{center}
 \begin{asy}
-	unitsize(1.35cm);
+	unitsize(0.75cm);
 	draw((-1,0)--(5,0),Arrow);
 	draw((0,-1)--(0,5),Arrow);
 	real h = 4.5;
@@ -92,8 +100,110 @@ let $x = \ceil*{\frac{k}{n}}$ and $y = xn - k$.
 Then $[ABC] = \frac12\left(xn - y\right) = k$, 
 and we know that $x \leq m$ and $y \leq n$ 
 since $x > m \implies k > mn$ 
-and $y > n \implies \ceil*{\frac{k}n} = x-1$, both of which are contradictions, so such $x,y$ exist, and we are done.
+and $y > n \implies \ceil*{\frac{k}n} = x-1$, both of which are contradictions, 
+so such $x,y$ exist, and we are done.
 
 \end{proof}
 
+\begin{example*}
+	[USAMTS 2/1/33]
+	Find, with proof, the minimum number positive integer $n$ with the 
+	following property: for any coloring of the integers $\{1,2\dots,n\}$
+	using the colors red and blue (that is, assigning the color
+	"red" or "blue" to each integer in the set), there exist distinct
+	integers $a,b,c$ between 1 and $n$, inclusive, all of the same color,
+	such that $2a+b=c$.
+\end{example*}
+
+\begin{proof}
+	Let $S$ be a coloring of $\{1,2\dots n\}$ with the required property.
+Let $n$ be the size of $S$. We claim that $n=14$ is maximal and achievable.
+
+First, we have the following lemma:
+\begin{lemma*}
+	If $a$ and $b$ are the same color ($a<b$, $a,b \in S$), 
+	then $2a+b$, $a+2b$ and $b - 2a$ are the opposite color.
+\end{lemma*}
+The proof of the lemma is trivial, but it is very useful.
+
+Without loss of generality, let 1 be colored red.
+Then we will break our problem into the following cases:
+
+\proofcase\label{red} 2 is red.
+\proofcase\label{blue21} 2 is blue, 3 is red
+\proofcase\label{blue22} 2 is blue, 3 is blue
+\bigskip
+
+We claim that:
+
+In case \ref{red} $n \leq 14$, and $n=14 is achievable$.
+
+In case \ref{blue21} $n \leq 10$
+
+In case \ref{blue22} $n \leq 8$
+
+\textbf{Case \ref{red}}
+
+In this case, 4 and 5 are both blue (for $a=1, b=2$)
+so 13 and 14 are both red ($(a,b) = (4,5)$)
+so 11 and 12 are both blue ($(1,13)$ and $(1,14)$).
+However, because $3 + 2(4) = 11$, 3 must be red. 
+This means that 7 and 8 are both blue ($(1,3)$ and $(2,3)$)
+We will now take a moment and look at our new list of numbers:
+\begin{center}
+	\red 1 2 3 \blue 4 5 \black 6 \blue 
+	7 8 \black 9 10 \blue 11 12 \red 13 14
+\end{center}
+Now, $2(4) + 7 = 15$ must be red, but that is impossible since
+$2(1) + 13$ must be blue, so $n \leq 14$.
+$14 - 2(2)$ and $13 - 2(2)$ must also both be blue, and 6 can be whatever,
+so here is our final set:
+\begin{center}
+	\red 1 2 3 \blue 4 5 \color{violet} 6 \blue 
+	7 8 9 10 11 12 \red 13 14
+\end{center}
+
+\textbf{Case \ref{blue21}}
+
+In this case, we know that 5 and 7 are both blue, so 9 and 11 are both red.
+However, $2(1) + 9 = 11$ so $n \leq 10$ in case \ref{blue21}.
+\begin{center}
+	\red 1 \blue 2 \red 3 \black 4 \blue 5 \black 6 \blue 7 \black 8 
+	\red 9 \black 10
+\end{center}
+
+We do not need to show that $n=10$ is achievable since by case \ref{red} $n=14$ is achievable.
+
+\textbf{Case \ref{blue22}}
+
+In this case, we know that both 7 and 8 are red, so 5 and 6 are blue
+(by subtracting by 2(1)) as are 9 and 10 (by adding 2(1)).
+\begin{center}
+	\red 1 \blue 2 3 \black 4 \blue 5 6 \red 7 8 \blue 9 10
+\end{center}
+However, this is impossible, as 9 must be red since 2 and 5 are both blue.
+So $n \leq 8$ in case \ref{blue22}.
+
+Once again, we don't actually need to show that $n=8$ is achievable
+since $n=14$ is achievable.
+
+In every case $n \leq 14$, and since $n=14$ is achievable our answer is \boxed{16} and we are done.
+
+\end{proof}
+
+The International Baccalaureate Organization (IBO) has a number of 
+assessment criteria identified for the internal assessment in mathematics,
+with each criterion having level descriptors describing specific achievement
+levels \cite[p. 80]{ibo_aa-guide_2021}. For the criterion on mathematical 
+communication, it is very important for students to understand that 
+appropriate notation, symbols, and terminology must be used in their 
+written work.
+
+As Dr. Annalisa Crannell explains in her paper “Writing in Mathematics”, 
+all variables used should be defined with words describing 
+what the variables represent. In particular, 
+``variables in text are italicized to tell them apart from regular letters''
+\cite[p. 5]{crannell_writing_1994}
+
+\printbibliography
 \end{document}
