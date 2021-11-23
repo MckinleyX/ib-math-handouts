@@ -4,10 +4,8 @@
 \usepackage{asymptote}
 \usepackage[backend=biber,style=alphabetic]{biblatex}
 \usepackage{xcolor}
-\usepackage{amsmath}
 \addbibresource{ref.bib}
 \addbibresource{aux.bib}
-\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \newcommand{\red}{\color{red}}
 \newcommand{\blue}{\color{blue}}
 \newcommand{\black}{\color{black}}
@@ -92,15 +90,15 @@ Since the slope of $AB$ is $n$, $CD = x - \frac{y}n$.
 
 So $[ABC] = \frac12n\left(x - \frac{y}n\right) = \frac12\left(xn - y\right)$.
 
-Let $\ceil*{x}$ denote the least integer greater than $x$.
+Let $\ceil{x}$ denote the least integer greater than $x$.
 
 Since the only thing we're bounded by is that $x,y \in \mathbb{Z}$ such that
 $0 \leq x \leq m$ and $0 \leq y \leq n$, 
-let $x = \ceil*{\frac{k}{n}}$ and $y = xn - k$.
+let $x = \ceil{\frac{k}{n}}$ and $y = xn - k$.
 Then $[ABC] = \frac12\left(xn - y\right) = k$, 
 and we know that $x \leq m$ and $y \leq n$ 
 since $x > m \implies k > mn$ 
-and $y > n \implies \ceil*{\frac{k}n} = x-1$, both of which are contradictions, 
+and $y > n \implies \ceil{\frac{k}n} = x-1$, both of which are contradictions, 
 so such $x,y$ exist, and we are done.
 
 \end{proof}
